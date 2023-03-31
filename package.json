@@ -1,0 +1,36 @@
+{
+  "name": "sir-sprints-a-lot",
+  "version": "1.0.0",
+  "description": "Endless runner platformer",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack --watch --mode=development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AErdenberger/Sir-Sprints-A-Lot.git"
+  },
+  "keywords": [],
+  "author": "Alex Erdenberger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AErdenberger/Sir-Sprints-A-Lot/issues"
+  },
+  "homepage": "https://github.com/AErdenberger/Sir-Sprints-A-Lot#readme",
+  "devDependencies": {
+    "webpack": "^5.77.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
+    "babel-loader": "^9.1.2",
+    "core-js": "^3.29.1",
+    "css-loader": "^6.7.3",
+    "mini-css-extract-plugin": "^2.7.5",
+    "regenerator-runtime": "^0.13.11",
+    "sass": "^1.60.0",
+    "sass-loader": "^13.2.2"
+  }
+}
+
