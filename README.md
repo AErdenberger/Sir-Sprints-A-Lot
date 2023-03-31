@@ -45,3 +45,5 @@ Bonus Features:
 
 1) Enemies for the user to fight on the way to the exit, defeating enemies will increase your score
 2) Add a boulder or a large enemy that is chasing the user
+
+ImpactJS Game Engine by Dominic Szablewski - https://impactjs.com/
