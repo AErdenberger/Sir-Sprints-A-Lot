@@ -1,4 +1,4 @@
-import { InputHandler } from "./knight.js";
+import InputHandler from "./input.js";
 
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext("2d");
@@ -32,7 +32,6 @@ export default class Layer {
     //move layers horizontally by changing their this.x and this.x2 and update them
     //when the layers move offscreen
     update(input){
-        console.log(input);
         if (this.x <= -(this.width)){
             this.x = this.width + this.x - this.speed;
         }
@@ -77,11 +76,8 @@ const allLayers = [layer3, layer4, layer1, layer2];
 function animate(){
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     allLayers.forEach(object => {
-        object.update();
+        object.update(input);
         object.draw();
     });
     requestAnimationFrame(animate);
 };
-
-
-animate();

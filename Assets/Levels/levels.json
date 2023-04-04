@@ -22,7 +22,7 @@
         "width":480,
         "height":32
     }],
-    "image": "./Assets/Levels/Bridge Sprint.png"
+    "image": "./Assets/Levels/BridgeSprint.png"
 },
 {
     "name": "CrouchorJump",
@@ -50,7 +50,7 @@
         "width": 64,
         "height": 80
     }],
-    "image": "./Assets/Levels/Crouch or Jump.png"
+    "image": "./Assets/Levels/CrouchorJump.png"
 },
 {
     "name": "Steppies",
@@ -118,7 +118,7 @@
         "width": 128,
         "height": 32
     }],
-    "image": "./Assets/Levels/Cave Hops.png"
+    "image": "./Assets/Levels/CaveHops.png"
 },
 {
     "name": "HigherAndHigher",
@@ -158,7 +158,7 @@
         "width": 96,
         "height": 32
     }],
-    "image":"./Assets/Levels/Higher and Higher.png"
+    "image":"./Assets/Levels/HigherandHigher.png"
 },
 {
     "name": "BrokenBridge",
@@ -234,7 +234,7 @@
         "width": 112,
         "height": 16
     }],
-    "image":"./Assets/Levels/Broken Bridge.png"
+    "image":"./Assets/Levels/BrokenBridge.png"
 },
 {
     "name": "CaveBridges",
@@ -268,7 +268,7 @@
         "width": 48,
         "height": 16
     }],
-    "image":"./Assets/Levels/Cave Bridges.png"
+    "image":"./Assets/Levels/CaveBridges.png"
 },
 {
     "name": "TripleJump",
@@ -295,5 +295,6 @@
         "y": 0,
         "width": 64,
         "height": 32
-    }]
+    }],
+    "image":"./Assets/Levels/TripleJump.png"
 }]

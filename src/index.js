@@ -1,10 +1,12 @@
 console.log("Webpack is working!")
 
-// import { forEach } from "core-js/core/array";
 import levelsData from "../Assets/Levels/levels.json";
 import Level from "../src/scripts/levels.js";
 import Layer from "../src/scripts/background.js";
-import {Player, InputHandler} from "./scripts/knight";
+import Player from "./scripts/knight";
+import InputHandler from "./scripts/input.js";
+import Platform from "./scripts/platform.js"
+import { distance, flipHorizontally } from "./scripts/util.js";
 
 window.addEventListener('load', function(){
     const canvas = document.getElementById('canvas1');
@@ -25,7 +27,7 @@ window.addEventListener('load', function(){
     // const turnAroundImage = new Image();
     // turnAroundImage = 'Assets/Knight/Colour1/Outline/120x80_PNGSheets/_TurnAround.png';
 
-    const SpriteSheet = [idleImage, crouchImage, crouchWalkImage, runImage, jumpImage];
+    const spriteSheet = [idleImage, crouchImage, crouchWalkImage, runImage, jumpImage];
 
     const backgroundLayer1 = new Image();
     backgroundLayer1.src = 'Assets/Background/BGBack.png';
@@ -45,7 +47,11 @@ window.addEventListener('load', function(){
     for (const data in levelsData) {
         console.log(data);
         const lev = levelsData[data];
-        levels.push(new Level(lev.name, lev.platforms, lev.image));
+        const platforms = [];
+        lev.platforms.forEach(plat => {
+            platforms.push(new Platform(plat.x, plat.y, plat.width, plat.height))       
+        });
+        levels.push(new Level(lev.name, platforms, lev.image));
         
     };
 
@@ -55,21 +61,20 @@ window.addEventListener('load', function(){
     const layer4 = new Layer(backgroundLayer4, 0.5, testPlayer.speed);
 
     const allLayers = [layer3, layer4, layer1, layer2];
-    
+    let lastTime = 0;
     console.log(levels);
 
-    function animate(){
+    function animate(timeStamp){
+        const deltaTime = timeStamp - lastTime
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         allLayers.forEach(object => {
             object.update(input);
             object.draw();
         });
-        levels.forEach(level => {
-            level.draw
-        })
+        levels[0].draw(ctx);
         testPlayer.draw(ctx);
-        testPlayer.update(input);
+        testPlayer.update(input, deltaTime, spriteSheet);
         requestAnimationFrame(animate);
     };
-    animate();
+    animate(0);
 });

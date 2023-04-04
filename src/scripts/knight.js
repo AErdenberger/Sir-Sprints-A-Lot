@@ -2,33 +2,9 @@
     const ctx = canvas.getContext('2d');
     canvas.width = 800;
     canvas.height = 700;
-    
-    export class InputHandler {
-        constructor(){
-            this.keys = [];
-            window.addEventListener('keydown', event => {
-                // console.log(event.key);
-                if ((event.key === 's' ||
-                    event.key === 'w' ||
-                    event.key === 'a' ||
-                    event.key === 'd') 
-                    && !(this.keys.includes(event.key))){
-                        this.keys.push(event.key)
-                    }
-                    console.log(event.key, this.keys);
-                });
-                window.addEventListener('keyup', event => {
-                // console.log(event.key);
-                if (event.key === 's' ||
-                event.key === 'w' ||
-                event.key === 'a' ||
-                event.key === 'd') {
-                    this.keys.splice(this.keys.indexOf(event.key), 1);
-                }
-                console.log(event.key, this.keys);
-            });
-        }
-    }
+
+    import InputHandler from "/src/scripts/input.js";
+    import { distance, flipHorizontally } from "/src/scripts/util.js";
 
     const idleImage = new Image();
     idleImage.src = 'Assets/Colour1/Outline/120x80_gifs/__Idle.gif';
@@ -43,27 +19,31 @@
     // const turnAroundImage = new Image();
     // turnAroundImage = 'Assets/Knight/Colour1/Outline/120x80_PNGSheets/_TurnAround.png';
 
-    const SpriteSheet = [idleImage, crouchImage, crouchWalkImage, runImage, jumpImage];
+    const spriteSheet = [idleImage, crouchImage, crouchWalkImage, runImage, jumpImage];
    
-    export class Player {
-        constructor(gameWidth, gameHeight){
+    export default class Player {
+        constructor(gameWidth, gameHeight, sprites){
             this.gameWidth = gameWidth;
             this.gameHeight = gameHeight;
             this.width = 120;
             this.height = 80;
-            this.x = 0;
-            this.y = this.gameHeight - this.height;
+            this.x = 32;
+            this.y = this.gameHeight - this.height - 64;
             this.image = idleImage;
+            this.maxFrame = 10;
             this.frameX = 0;
             this.frameY = 0;
+            this.fps = 20;
+            this.frameTimer = 0;
+            this.frameInterval = 1000/this.fps;
             this.speed = 0;
             this.vel = 0;
             this.grav = 1;
         }
         
         draw(context){
-            context.fillStyle = 'white'
-            context.fillRect(this.x, this.y, this.width, this.height)
+            // context.fillStyle = 'white'
+            // context.fillRect(this.x, this.y, this.width, this.height)
             context.drawImage(this.image, 
                             (this.frameX * this.width), 
                             (this.frameY * this.height), 
@@ -75,16 +55,32 @@
                             this.height);
         }
 
-        update(input){
+        update(input, deltaTime, sprites){
+            //sprite animation
+            if (this.frameTimer > this.frameInterval){
+                if (this.frameX >= this.maxFrame){
+                    this.frameX = 0;
+                } else {
+                    this.frameX++
+                }
+                this.frameTimer = 0;
+            } else {
+                this.frameTimer += deltaTime;
+            }
+
+            //controls
             if (input.keys.includes('d')){
                 this.speed = 5;
+                this.image = sprites[3];
             } else if (input.keys.includes('a')){
                 this.speed = -5;
+                this.image = sprites[3];
             } else if (input.keys.includes('w') && this.onGround()){
-                console.log("jumping")
-                this.vel -= 10;
+                // console.log("jumping")
+                this.vel -= 15;
             } else {
                 this.speed = 0;
+                this.image = sprites[0];
             }
             
             //horizontal movement
@@ -108,7 +104,7 @@
         }
 
         onGround(){
-            return (this.y >= this.gameHeight - this.height);
+            return (this.y >= this.gameHeight - this.height - 64);
         };
     }
 
@@ -121,4 +117,3 @@
         testPlayer.update(input);
         requestAnimationFrame(animate);
     }
-    animate();
