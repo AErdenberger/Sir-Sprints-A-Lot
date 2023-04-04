@@ -32,12 +32,12 @@ export default class Layer {
     //move layers horizontally by changing their this.x and this.x2 and update them
     //when the layers move offscreen
     update(input){
-        if (this.x <= -(this.width)){
-            this.x = this.width + this.x - this.speed;
-        }
-        if (this.x <= -(this.width)){
-            this.x2 = this.width + this.x - this.speed;
-        }
+        // if (this.x <= -(this.width)){
+        //     this.x = this.width + this.x - this.speed;
+        // }
+        // if (this.x2 <= -(this.width)){
+        //     this.x2 = this.width + this.x - this.speed;
+        // }
         if (input.keys.includes('d')){
             this.speed = 5;
         } else if (input.keys.includes('a')){
@@ -47,15 +47,16 @@ export default class Layer {
         }
         
         //horizontal movement
-        this.x += this.speed;
-        if (this.x < 0){
-            this.x = 0;
-        } else if (this.x > (this.gameWidth - this.width)){
-            this.x = this.gameWidth - this.width;
+        this.x -= this.speed;
+        if (this.x < -(this.width)){
+            this.x = this.width;
+        } else if (this.x > (this.width)){
+            this.x = -(this.width);
         }
 
-        this.x = Math.floor(this.x - this.speed);
-        this.x2 = Math.floor(this.x2 - this.speed);
+        this.x2 = this.x + this.width;
+        // this.x = Math.floor(this.x - this.speed);
+        // this.x2 = Math.floor(this.x2 - this.speed);
     }
     //take in information about the layer object and draw it on the canvas
     //every time update is called, draw will be called to draw the layer

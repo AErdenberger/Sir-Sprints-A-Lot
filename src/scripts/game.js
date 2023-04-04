@@ -1,9 +1,9 @@
-import levelsData from "../Assets/Levels/levels.json";
-import Level from "../src/scripts/levels.js";
-import Layer from "../src/scripts/background.js";
-import Player from "./scripts/knight";
-import InputHandler from "./scripts/input.js";
-import Platform from "./scripts/platform.js"
+import levelsData from "/Assets/Levels/levels.json";
+import Level from "/src/scripts/levels.js";
+import Layer from "/src/scripts/background.js";
+import Player from "/src/scripts/knight";
+import InputHandler from "/src/scripts/input.js";
+import Platform from "/src/scripts/platform.js";
 
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext("2d");
@@ -34,15 +34,16 @@ backgroundLayer3.src = 'Assets/Background/CloudsBack.png';
 const backgroundLayer4 = new Image();
 backgroundLayer4.src = 'Assets/Background/CloudsFront.png';
 
-const layer1 = new Layer(backgroundLayer1, 1, testPlayer.speed);
-const layer2 = new Layer(backgroundLayer2, 1, testPlayer.speed);
-const layer3 = new Layer(backgroundLayer3, 0.5, testPlayer.speed);
-const layer4 = new Layer(backgroundLayer4, 0.5, testPlayer.speed);
 
 const allLayers = [layer3, layer4, layer1, layer2];
 
 const input = new InputHandler();
 const testPlayer = new Player(canvas.width, canvas.height);
+
+const layer1 = new Layer(backgroundLayer1, 1, testPlayer.speed);
+const layer2 = new Layer(backgroundLayer2, 1, testPlayer.speed);
+const layer3 = new Layer(backgroundLayer3, 0.5, testPlayer.speed);
+const layer4 = new Layer(backgroundLayer4, 0.5, testPlayer.speed);
 
 let levels = [];
 for (const data in levelsData) {
@@ -55,22 +56,76 @@ for (const data in levelsData) {
     levels.push(new Level(lev.name, platforms, lev.image)); 
 };
 
-
-
-
-class Game {
-    constructor(player, levels){
+export default class Game {
+    constructor(player, levels, ctx, layers){
         this.player = player;
         this.levels = levels;
         this.curLevel = levels[0];
+        this.nextLevel = null;
+        this.ctx = ctx;
+        this.layers = layers;
+        this.lastTime = 0;
     };
 
     setNextLevel(){
         let levelSelector = Math.floor(Math.random() * 8);
-        this.nextLevel = levels.slice(1)[levelSelector];
+        return this.nextLevel = levels.slice(1)[levelSelector];
     };
 
-    // changeCurLevel(){
-    //     if (this.curLevel.x === cu)
-    // }
+    changeCurLevel(){
+        this.curLevel = this.nextLevel;
+        this.setNextLevel();
+    };
+
+    draw() {
+        // Calculate the x-position of the player relative to the canvas center
+        const playerXPosRelativeToCenter = this.player.x - CANVAS_WIDTH/2;
+        
+        // Check if the player has moved past the center of the canvas
+        if (playerXPosRelativeToCenter > 0) {
+          // Move the player to the center of the canvas
+          this.player.x = CANVAS_WIDTH/2;
+          
+          // Move the platforms and background layers to simulate scrolling
+          const scrollDistance = playerXPosRelativeToCenter;
+          for (const platform of this.curLevel.platforms) {
+            platform.x -= scrollDistance;
+          }
+          for (const layer of allLayers) {
+            layer.move(scrollDistance);
+          }
+          
+          // Check if the current level has been completely scrolled off the screen
+          if (this.curLevel.platforms[0].x + this.curLevel.platforms[0].width < 0) {
+            // If so, change to the next level and reset its position
+            this.changeCurLevel();
+            this.curLevel.platforms[0].x = CANVAS_WIDTH;
+          }
+        }
+        
+        // Render the player and the current level
+        ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        this.player.draw(ctx);
+        this.curLevel.draw(ctx);
+        
+        // Render the background layers
+        for (const layer of allLayers) {
+          layer.draw(ctx);
+        }
+    };
+
+
+    animate(timeStamp) {
+        const deltaTime = timeStamp - this.lastTime;
+        this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+        this.layers.forEach((object) => {
+          object.update(input);
+          object.draw();
+        });
+        this.curLevel.draw(this.ctx);
+        this.curLevel.update(input);
+        this.player.draw(this.ctx);
+        this.player.update(input, deltaTime, spriteSheet);
+        requestAnimationFrame(this.animate.bind(this));
+    }
 }

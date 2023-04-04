@@ -5,7 +5,8 @@ import Level from "../src/scripts/levels.js";
 import Layer from "../src/scripts/background.js";
 import Player from "./scripts/knight";
 import InputHandler from "./scripts/input.js";
-import Platform from "./scripts/platform.js"
+import Platform from "./scripts/platform.js";
+import Game from "./scripts/game";
 import { distance, flipHorizontally } from "./scripts/util.js";
 
 window.addEventListener('load', function(){
@@ -64,17 +65,22 @@ window.addEventListener('load', function(){
     let lastTime = 0;
     console.log(levels);
 
-    function animate(timeStamp){
-        const deltaTime = timeStamp - lastTime
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
-        allLayers.forEach(object => {
-            object.update(input);
-            object.draw();
-        });
-        levels[0].draw(ctx);
-        testPlayer.draw(ctx);
-        testPlayer.update(input, deltaTime, spriteSheet);
-        requestAnimationFrame(animate);
-    };
-    animate(0);
+    const game = new Game(testPlayer, levels, ctx, allLayers);
+
+    game.animate(0);
+
+    // function animate(timeStamp){
+    //     const deltaTime = timeStamp - lastTime
+    //     ctx.clearRect(0, 0, canvas.width, canvas.height)
+    //     allLayers.forEach(object => {
+    //         object.update(input);
+    //         object.draw();
+    //     });
+    //     levels[0].draw(ctx);
+    //     levels[0].update(input);
+    //     testPlayer.draw(ctx);
+    //     testPlayer.update(input, deltaTime, spriteSheet);
+    //     requestAnimationFrame(animate);
+    // };
+    // animate(0);
 });
