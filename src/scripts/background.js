@@ -1,8 +1,11 @@
+import { InputHandler } from "./knight.js";
+
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext("2d");
 const CANVAS_WIDTH = canvas.width = 800;
 const CANVAS_HEIGHT = canvas.height = 700;
-let gameSpeed = 5;
+// let gameSpeed = 5; Player.speed;
+
 
 const backgroundLayer1 = new Image();
 backgroundLayer1.src = 'Assets/Background/BGBack.png';
@@ -14,8 +17,8 @@ const backgroundLayer4 = new Image();
 backgroundLayer4.src = 'Assets/Background/CloudsFront.png';
 
 
-class Layer {
-    constructor(image, speedModifier){
+export default class Layer {
+    constructor(image, speedModifier, gameSpeed){
         this.x = 0;
         this.y = 0;
         this.width = 2400;
@@ -28,13 +31,30 @@ class Layer {
 
     //move layers horizontally by changing their this.x and this.x2 and update them
     //when the layers move offscreen
-    update(){
+    update(input){
+        console.log(input);
         if (this.x <= -(this.width)){
             this.x = this.width + this.x - this.speed;
         }
         if (this.x <= -(this.width)){
             this.x2 = this.width + this.x - this.speed;
         }
+        if (input.keys.includes('d')){
+            this.speed = 5;
+        } else if (input.keys.includes('a')){
+            this.speed = -5;
+        } else {
+            this.speed = 0;
+        }
+        
+        //horizontal movement
+        this.x += this.speed;
+        if (this.x < 0){
+            this.x = 0;
+        } else if (this.x > (this.gameWidth - this.width)){
+            this.x = this.gameWidth - this.width;
+        }
+
         this.x = Math.floor(this.x - this.speed);
         this.x2 = Math.floor(this.x2 - this.speed);
     }
@@ -62,5 +82,6 @@ function animate(){
     });
     requestAnimationFrame(animate);
 };
+
 
 animate();
