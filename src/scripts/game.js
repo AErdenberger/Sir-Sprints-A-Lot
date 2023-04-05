@@ -85,8 +85,6 @@ export default class Game {
         const playerXPosRelativeToCenter = this.player.x - CANVAS_WIDTH/2;
         // Check if the player has moved past the center of the canvas
         if (playerXPosRelativeToCenter > 0) {
-            // Move the player to the center of the canvas
-            //this.player.x = CANVAS_WIDTH/2;
             // Move the platforms and background layers to simulate scrolling
             const scrollDistance = playerXPosRelativeToCenter;
             for (const platform of this.curLevel.platforms) {
