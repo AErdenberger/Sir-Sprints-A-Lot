@@ -65,7 +65,7 @@ window.addEventListener('load', function(){
     let lastTime = 0;
     console.log(levels);
 
-    const game = new Game(testPlayer, levels, ctx, allLayers);
+    const game = new Game(testPlayer, levels, ctx, allLayers, input);
 
     game.animate(0);
 

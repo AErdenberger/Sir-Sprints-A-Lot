@@ -21,7 +21,7 @@ export default class Layer {
     constructor(image, speedModifier, gameSpeed){
         this.x = 0;
         this.y = 0;
-        this.width = 2400;
+        this.width = 1024;
         this.height = 700;
         this.x2 = this.width;
         this.image = image;
@@ -63,11 +63,7 @@ export default class Layer {
     draw(){
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
         ctx.drawImage(this.image, this.x2, this.y, this.width, this.height)
-    }
-    
-    move(distance) {
-        this.x -= distance * this.speed;
-    }
+    }   
 }
 
 const layer1 = new Layer(backgroundLayer1, 1);
