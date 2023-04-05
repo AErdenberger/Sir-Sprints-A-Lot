@@ -61,23 +61,24 @@ export default class Game {
         this.player = player;
         this.levels = levels;
         this.curLevel = levels[0];
-        this.nextLevel = null;
+        this.nextLevel = levels[1];
         this.ctx = ctx;
         this.layers = layers;
         this.lastTime = 0;
+        this.randomLevels = levels.slice(1);
     };
 
     setNextLevel(){
         let levelSelector = Math.floor(Math.random() * 8);
-        return this.nextLevel = levels.slice(1)[levelSelector];
+        return this.randomLevels[levelSelector];
     };
 
     changeCurLevel(){
-        this.curLevel = this.nextLevel;
         this.setNextLevel();
+        this.curLevel = this.nextLevel;
     };
 
-    draw() {
+    draw(ctx) {
         // Calculate the x-position of the player relative to the canvas center
         const playerXPosRelativeToCenter = this.player.x - CANVAS_WIDTH/2;
         
@@ -91,7 +92,48 @@ export default class Game {
           for (const platform of this.curLevel.platforms) {
             platform.x -= scrollDistance;
           }
-          for (const layer of allLayers) {
+          for (const layer of this.layers) {
+            layer.move(scrollDistance);
+          }
+          
+          // Check if the current level has been completely scrolled off the screen
+          if (this.curLevel.platforms[0].x + this.curLevel.platforms[0].width < 0) {
+            // If so, change to the next level and reset its position
+            this.nextLevel = this.setNextLevel;
+            this.changeCurLevel();
+          }
+        }
+        
+        // Render the player and the current level
+        ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        this.player.draw(this.ctx);
+        this.curLevel.draw(this.ctx);
+        
+        // Render the background layers
+        for (const layer of this.layers) {
+          layer.draw();
+        }
+    };
+
+
+    animate(timeStamp) {
+        const deltaTime = timeStamp - this.lastTime;
+        // this.nextLevel = this.setNextLevel();
+        
+        // Calculate the x-position of the player relative to the canvas center
+        const playerXPosRelativeToCenter = this.player.x - CANVAS_WIDTH/2;
+        
+        // Check if the player has moved past the center of the canvas
+        if (playerXPosRelativeToCenter > 0) {
+          // Move the player to the center of the canvas
+          this.player.x = CANVAS_WIDTH/2;
+          
+          // Move the platforms and background layers to simulate scrolling
+          const scrollDistance = playerXPosRelativeToCenter;
+          for (const platform of this.curLevel.platforms) {
+            platform.x -= scrollDistance;
+          }
+          for (const layer of this.layers) {
             layer.move(scrollDistance);
           }
           
@@ -99,33 +141,27 @@ export default class Game {
           if (this.curLevel.platforms[0].x + this.curLevel.platforms[0].width < 0) {
             // If so, change to the next level and reset its position
             this.changeCurLevel();
-            this.curLevel.platforms[0].x = CANVAS_WIDTH;
           }
         }
         
-        // Render the player and the current level
-        ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-        this.player.draw(ctx);
-        this.curLevel.draw(ctx);
+        // Clear the canvas
+        this.ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
         
         // Render the background layers
-        for (const layer of allLayers) {
-          layer.draw(ctx);
+        for (const layer of this.layers) {
+          layer.draw(this.ctx);
         }
-    };
-
-
-    animate(timeStamp) {
-        const deltaTime = timeStamp - this.lastTime;
-        this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-        this.layers.forEach((object) => {
-          object.update(input);
-          object.draw();
-        });
+        
+        // Render the current level
         this.curLevel.draw(this.ctx);
-        this.curLevel.update(input);
+        
+        // Render the player
         this.player.draw(this.ctx);
+        
+        // Update the player and current level
         this.player.update(input, deltaTime, spriteSheet);
+        this.curLevel.update(input);
+        
         requestAnimationFrame(this.animate.bind(this));
     }
 }

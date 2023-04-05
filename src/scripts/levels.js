@@ -13,6 +13,7 @@ export default class Level {
         this.y = 0;
         this.width = canvas.width;
         this.height = canvas.height;
+        this.x2 = this.width;
         this.speed = 5;
     };
 
@@ -21,21 +22,24 @@ export default class Level {
 
         this.platforms.forEach((platform) => {
             platform.draw(ctx);
-          });
+        });
     };
 
     drawNext(ctx, image){
-        ctx.drawImage(image, this.width, this.y, this.width, this.height)
+        ctx.drawImage(image, this.x2, this.y, this.width, this.height)
     };
 
     update(input){
-        let x2 = this.x + this.width;
-        if (this.x <= -(this.width)){
-            this.x = this.width + this.x - this.speed;
+        this.x -= this.speed;
+        this.x2 -= this.speed;
+
+        if (this.x > 0){
+            this.x2 = this.x - this.width;
         }
-        if (x2 <= -(this.width)){
-            x2 = this.width + this.x - this.speed;
+        if (this.x2 > 0){
+            this.x = this.x2 - this.width;
         }
+
         if (input.keys.includes('d')){
             this.speed = 5;
         } else if (input.keys.includes('a')){
@@ -45,14 +49,10 @@ export default class Level {
         }
         
         //horizontal movement
-        this.x += this.speed;
-        if (this.x < 0){
-            this.x = 0;
-        } else if (this.x > (this.gameWidth - this.width)){
-            this.x = this.gameWidth - this.width;
+        if (this.x < -(this.width)){
+            this.x = this.width;
+        } else if (this.x > (this.width)){
+            this.x = -(this.width);
         }
-
-        this.x = Math.floor(this.x - this.speed);
-        x2 = Math.floor(x2 - this.speed);
     };
 }
