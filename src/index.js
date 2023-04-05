@@ -1,5 +1,3 @@
-console.log("Webpack is working!")
-
 import levelsData from "../Assets/Levels/levels.json";
 import Level from "../src/scripts/levels.js";
 import Layer from "../src/scripts/background.js";
@@ -43,10 +41,8 @@ window.addEventListener('load', function(){
     
     const input = new InputHandler();
     const testPlayer = new Player(canvas.width, canvas.height);
-    console.log(levelsData);
     let levels = [];
     for (const data in levelsData) {
-        console.log(data);
         const lev = levelsData[data];
         const platforms = [];
         lev.platforms.forEach(plat => {
@@ -63,7 +59,6 @@ window.addEventListener('load', function(){
 
     const allLayers = [layer3, layer4, layer1, layer2];
     let lastTime = 0;
-    console.log(levels);
 
     const game = new Game(testPlayer, levels, ctx, allLayers, input);
 

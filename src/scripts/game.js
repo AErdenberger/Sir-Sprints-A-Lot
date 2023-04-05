@@ -47,7 +47,6 @@ const layer4 = new Layer(backgroundLayer4, 0.5, testPlayer.speed);
 
 let levels = [];
 for (const data in levelsData) {
-    console.log(data);
     const lev = levelsData[data];
     const platforms = [];
     lev.platforms.forEach(plat => {

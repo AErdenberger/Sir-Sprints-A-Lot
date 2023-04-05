@@ -10,7 +10,6 @@ export default class InputHandler {
                 && !(this.keys.includes(event.key))){
                     this.keys.push(event.key)
                 }
-                console.log(event.key, this.keys);
             });
             window.addEventListener('keyup', event => {
             // console.log(event.key);
@@ -20,7 +19,6 @@ export default class InputHandler {
             event.key === 'd') {
                 this.keys.splice(this.keys.indexOf(event.key), 1);
             }
-            console.log(event.key, this.keys);
         });
     }
 }

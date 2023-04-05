@@ -7,7 +7,7 @@ export default class Platform {
     };
 
     draw(ctx) {
-        ctx.fillStyle = "#333";
-        ctx.fillRect(this.x, this.y, this.height, this.width);
+        // ctx.fillStyle = "#333";
+        // ctx.fillRect(this.x, this.y, this.height, this.width);
     }
 }

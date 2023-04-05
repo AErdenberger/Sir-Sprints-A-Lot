@@ -1,3 +1,11 @@
+#header {
+	color: white;
+	font-size: xx-large;
+	position: absolute;
+	float: center;
+	left: 45%
+}
+
 body {
     background-color: black;
 }
@@ -10,4 +18,36 @@ body {
 	transform: translate(-50%, -50%);
 	top: 50%;
 	left: 50%;
+}
+
+#Controls {
+	position: absolute;
+	float: left;
+	width: 150px;
+	height: min-content;
+	color: white;
+	border: 3px solid white;
+	list-style: none;
+	top: 50%;
+	right: 75%;
+}
+
+#About {
+	position: absolute;
+	float: right;
+	border: 3px solid white;
+	width: 150px;
+	height: 150px;
+	top: 45%;
+	right: 15%;
+}
+
+#linkedin {
+	width: 30%;
+	height: auto;
+}
+
+#github{
+	width: 30%;
+	height: auto;
 }
