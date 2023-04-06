@@ -35,7 +35,6 @@ const backgroundLayer4 = new Image();
 backgroundLayer4.src = '/Assets/Background/CloudsFront.png';
 
 
-const allLayers = [layer3, layer4, layer1, layer2];
 
 const input = new InputHandler();
 const testPlayer = new Player(canvas.width, canvas.height);
@@ -44,6 +43,8 @@ const layer1 = new Layer(backgroundLayer1, 1, testPlayer.speed);
 const layer2 = new Layer(backgroundLayer2, 1, testPlayer.speed);
 const layer3 = new Layer(backgroundLayer3, 0.5, testPlayer.speed);
 const layer4 = new Layer(backgroundLayer4, 0.5, testPlayer.speed);
+
+const allLayers = [layer3, layer4, layer1, layer2];
 
 let levels = [];
 for (const data in levelsData) {
