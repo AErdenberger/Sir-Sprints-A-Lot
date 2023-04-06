@@ -36,6 +36,7 @@
             this.fps = 20;
             this.frameTimer = 0;
             this.frameInterval = 1000/this.fps;
+            this.sprites = sprites;
             this.speed = 0;
             this.vel = 0;
             this.grav = 1;
@@ -71,13 +72,14 @@
             //controls
             if (input.keys.includes('d')){
                 this.speed = 5;
-                this.image = sprites[3];
+                this.image = sprites[1];
             } else if (input.keys.includes('a')){
                 this.speed = -5;
-                this.image = sprites[3];
+                this.image = sprites[1];
             } else if (input.keys.includes('w') && this.onGround()){
                 // console.log("jumping")
                 this.vel -= 15;
+                this.image = sprites[2];
             } else {
                 this.speed = 0;
                 this.image = sprites[0];
