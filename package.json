@@ -4,7 +4,8 @@
   "description": "Endless runner platformer",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --watch --mode=development"
+    "start": "webpack --watch --mode=development",
+    "build": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
