@@ -8,13 +8,13 @@ const CANVAS_HEIGHT = canvas.height = 700;
 
 
 const backgroundLayer1 = new Image();
-backgroundLayer1.src = 'Assets/Background/BGBack.png';
+backgroundLayer1.src = '/Assets/Background/BGBack.png';
 const backgroundLayer2 = new Image();
-backgroundLayer2.src = 'Assets/Background/BGFront.png';
+backgroundLayer2.src = '/Assets/Background/BGFront.png';
 const backgroundLayer3 = new Image();
-backgroundLayer3.src = 'Assets/Background/CloudsBack.png';
+backgroundLayer3.src = '/Assets/Background/CloudsBack.png';
 const backgroundLayer4 = new Image();
-backgroundLayer4.src = 'Assets/Background/CloudsFront.png';
+backgroundLayer4.src = '/Assets/Background/CloudsFront.png';
 
 
 export default class Layer {

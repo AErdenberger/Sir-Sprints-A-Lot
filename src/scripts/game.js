@@ -11,28 +11,28 @@ const CANVAS_WIDTH = canvas.width = 800;
 const CANVAS_HEIGHT = canvas.height = 700;
 
 const idleImage = new Image();
-idleImage.src = 'Assets/Colour1/Outline/120x80_PNGSheets/_Idle.png';
+idleImage.src = '/Assets/Colour1/Outline/120x80_PNGSheets/_Idle.png';
 const crouchImage = new Image();
-crouchImage.src = 'Assets/Knight/Colour1/Outline/120x80_PNGSheets/_CrouchFull.png';
+crouchImage.src = '/Assets/Knight/Colour1/Outline/120x80_PNGSheets/_CrouchFull.png';
 const crouchWalkImage = new Image();
-crouchWalkImage.src = 'Assets/Knight/Colour1/Outline/120x80_PNGSheets/_CrouchWalk.png';
+crouchWalkImage.src = '/Assets/Knight/Colour1/Outline/120x80_PNGSheets/_CrouchWalk.png';
 const runImage = new Image();
-runImage.src = 'Assets/Knight/Colour1/Outline/120x80_PNGSheets/_Run.png';
+runImage.src = '/Assets/Knight/Colour1/Outline/120x80_PNGSheets/_Run.png';
 const jumpImage = new Image();
-jumpImage.src = 'Assets/Knight/Colour1/Outline/120x80_PNGSheets/_Jump.png';
+jumpImage.src = '/Assets/Knight/Colour1/Outline/120x80_PNGSheets/_Jump.png';
 // const turnAroundImage = new Image();
 // turnAroundImage = 'Assets/Knight/Colour1/Outline/120x80_PNGSheets/_TurnAround.png';
 
 const spriteSheet = [idleImage, crouchImage, crouchWalkImage, runImage, jumpImage];
 
 const backgroundLayer1 = new Image();
-backgroundLayer1.src = 'Assets/Background/BGBack.png';
+backgroundLayer1.src = '/Assets/Background/BGBack.png';
 const backgroundLayer2 = new Image();
-backgroundLayer2.src = 'Assets/Background/BGFront.png';
+backgroundLayer2.src = '/Assets/Background/BGFront.png';
 const backgroundLayer3 = new Image();
-backgroundLayer3.src = 'Assets/Background/CloudsBack.png';
+backgroundLayer3.src = '/Assets/Background/CloudsBack.png';
 const backgroundLayer4 = new Image();
-backgroundLayer4.src = 'Assets/Background/CloudsFront.png';
+backgroundLayer4.src = '/Assets/Background/CloudsFront.png';
 
 
 const allLayers = [layer3, layer4, layer1, layer2];
