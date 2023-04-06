@@ -1,7 +1,7 @@
 import levelsData from "/Assets/Levels/levels.json";
 import Level from "/src/scripts/levels.js";
 import Layer from "/src/scripts/background.js";
-import Player from "/src/scripts/knight";
+import Player from "/src/scripts/knight.js";
 import InputHandler from "/src/scripts/input.js";
 import Platform from "/src/scripts/platform.js";
 

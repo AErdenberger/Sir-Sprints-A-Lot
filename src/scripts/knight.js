@@ -7,7 +7,7 @@
     import { distance, flipHorizontally } from "/src/scripts/util.js";
 
     const idleImage = new Image();
-    idleImage.src = './Assets/Colour1/Outline/120x80_gifs/__Idle.gif';
+    idleImage.src = './Assets/Colour1/Outline/120x80_PNGSheets/_Idle.png';
     const crouchImage = new Image();
     crouchImage.src = './Assets/Knight/Colour1/Outline/120x80_PNGSheets/_CrouchFull.png';
     const crouchWalkImage = new Image();
