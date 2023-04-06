@@ -8,10 +8,10 @@
 
     const idleImage = new Image();
     idleImage.src = './Assets/Colour1/Outline/120x80_PNGSheets/_Idle.png';
-    const crouchImage = new Image();
-    crouchImage.src = './Assets/Knight/Colour1/Outline/120x80_PNGSheets/_CrouchFull.png';
-    const crouchWalkImage = new Image();
-    crouchWalkImage.src = './Assets/Knight/Colour1/Outline/120x80_PNGSheets/_CrouchWalk.png';
+    // const crouchImage = new Image();
+    // crouchImage.src = './Assets/Knight/Colour1/Outline/120x80_PNGSheets/_CrouchFull.png';
+    // const crouchWalkImage = new Image();
+    // crouchWalkImage.src = './Assets/Knight/Colour1/Outline/120x80_PNGSheets/_CrouchWalk.png';
     const runImage = new Image();
     runImage.src = './Assets/Knight/Colour1/Outline/120x80_PNGSheets/_Run.png';
     const jumpImage = new Image();
@@ -19,7 +19,7 @@
     // const turnAroundImage = new Image();
     // turnAroundImage = 'Assets/Knight/Colour1/Outline/120x80_PNGSheets/_TurnAround.png';
 
-    const spriteSheet = [idleImage, crouchImage, crouchWalkImage, runImage, jumpImage];
+    const spriteSheet = [idleImage, runImage, jumpImage];
    
     export default class Player {
         constructor(gameWidth, gameHeight, sprites){
