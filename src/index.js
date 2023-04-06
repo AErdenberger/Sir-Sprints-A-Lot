@@ -1,10 +1,10 @@
-import levelsData from "../Assets/Levels/levels.json";
-import Level from "../src/scripts/levels.js";
-import Layer from "../src/scripts/background.js";
-import Player from "./scripts/knight";
-import InputHandler from "./scripts/input.js";
-import Platform from "./scripts/platform.js";
-import Game from "./scripts/game";
+import levelsData from "/Assets/Levels/levels.json";
+import Level from "/src/scripts/levels.js";
+import Layer from "/src/scripts/background.js";
+import Player from "/src/scripts/knight";
+import InputHandler from "/src/scripts/input.js";
+import Platform from "/src/scripts/platform.js";
+import Game from "/src/scripts/game";
 import { distance, flipHorizontally } from "./scripts/util.js";
 
 window.addEventListener('load', function(){
