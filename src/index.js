@@ -5,7 +5,6 @@ import Player from "/src/scripts/knight.js";
 import InputHandler from "/src/scripts/input.js";
 import Platform from "/src/scripts/platform.js";
 import Game from "/src/scripts/game.js";
-import { distance, flipHorizontally } from "./scripts/util.js";
 
 window.addEventListener('load', function(){
     const canvas = document.getElementById('canvas1');
@@ -25,8 +24,6 @@ window.addEventListener('load', function(){
     jumpImage.src = './Assets/Knight/Colour1/Outline/120x80_PNGSheets/_Jump.png';
     // const turnAroundImage = new Image();
     // turnAroundImage = 'Assets/Knight/Colour1/Outline/120x80_PNGSheets/_TurnAround.png';
-
-    const spriteSheet = [idleImage, runImage, jumpImage];
 
     const backgroundLayer1 = new Image();
     backgroundLayer1.src = './Assets/Background/BGBack.png';
@@ -58,24 +55,8 @@ window.addEventListener('load', function(){
     const layer4 = new Layer(backgroundLayer4, 0.5, testPlayer.speed);
 
     const allLayers = [layer3, layer4, layer1, layer2];
-    let lastTime = 0;
 
     const game = new Game(testPlayer, levels, ctx, allLayers, input);
 
-    game.animate(0);
-
-    // function animate(timeStamp){
-    //     const deltaTime = timeStamp - lastTime
-    //     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    //     allLayers.forEach(object => {
-    //         object.update(input);
-    //         object.draw();
-    //     });
-    //     levels[0].draw(ctx);
-    //     levels[0].update(input);
-    //     testPlayer.draw(ctx);
-    //     testPlayer.update(input, deltaTime, spriteSheet);
-    //     requestAnimationFrame(animate);
-    // };
-    // animate(0);
+    game.animate(1);
 });

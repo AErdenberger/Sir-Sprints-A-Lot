@@ -1,3 +1,59 @@
-#header{color:#fff;font-size:xx-large;position:absolute;left:40%}body{background-color:#000}#canvas1{position:relative;border:3px solid #fff;width:800px;height:700px;transform:translate(-80%, 10%);top:50%;left:50%;margin:5px}#Controls{position:relative;width:150px;float:left;height:min-content;color:#fff;border:3px solid #fff;list-style:none;top:400px;right:0px;margin:10px}#About{position:relative;list-style:none;float:right;border:3px solid #fff;width:150px;height:150px;top:350px;right:0%;margin:10px}#linkedin{width:30%;height:auto}#github{width:30%;height:auto}
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
+  \*************************************************************************************************************************************/
+#header {
+  color: white;
+  font-size: xx-large;
+  position: absolute;
+  left: 40%;
+}
 
-/*# sourceMappingURL=main.css.map*/
+body {
+  background-color: black;
+}
+
+#canvas1 {
+  position: relative;
+  border: 3px solid white;
+  width: 800px;
+  height: 700px;
+  transform: translate(-80%, 10%);
+  top: 50%;
+  left: 50%;
+  margin: 5px;
+}
+
+#Controls {
+  position: relative;
+  width: 150px;
+  float: left;
+  height: min-content;
+  color: white;
+  border: 3px solid white;
+  list-style: none;
+  top: 400px;
+  right: 0px;
+  margin: 10px;
+}
+
+#About {
+  position: relative;
+  list-style: none;
+  float: right;
+  border: 3px solid white;
+  width: 150px;
+  height: 150px;
+  top: 350px;
+  right: 0%;
+  margin: 10px;
+}
+
+#linkedin {
+  width: 30%;
+  height: auto;
+}
+
+#github {
+  width: 30%;
+  height: auto;
+}

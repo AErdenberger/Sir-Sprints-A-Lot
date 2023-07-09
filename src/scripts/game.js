@@ -1,9 +1,8 @@
 import levelsData from "/Assets/Levels/levels.json";
 import Level from "/src/scripts/levels.js";
-import Layer from "/src/scripts/background.js";
-import Player from "/src/scripts/knight.js";
 import InputHandler from "/src/scripts/input.js";
 import Platform from "/src/scripts/platform.js";
+import { distance } from "./util";
 
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext("2d");
@@ -34,17 +33,7 @@ backgroundLayer3.src = './Assets/Background/CloudsBack.png';
 const backgroundLayer4 = new Image();
 backgroundLayer4.src = './Assets/Background/CloudsFront.png';
 
-
-
 const input = new InputHandler();
-const testPlayer = new Player(canvas.width, canvas.height);
-
-const layer1 = new Layer(backgroundLayer1, 1, testPlayer.speed);
-const layer2 = new Layer(backgroundLayer2, 1, testPlayer.speed);
-const layer3 = new Layer(backgroundLayer3, 0.5, testPlayer.speed);
-const layer4 = new Layer(backgroundLayer4, 0.5, testPlayer.speed);
-
-const allLayers = [layer3, layer4, layer1, layer2];
 
 let levels = [];
 for (const data in levelsData) {
@@ -76,28 +65,18 @@ export default class Game {
 
     changeCurLevel(){
         this.curLevel = this.nextLevel;
-        this.setNextLevel();
+        this.player.x = this.curLevel.startPoint[0];
+        this.player.y = this.player.gameHeight - this.player.height - 64
+        this.nextLevel = this.setNextLevel();
+        return this.curLevel;
     };
 
     animate(timeStamp) {
         const deltaTime = timeStamp - this.lastTime;
-        // Calculate the x-position of the player relative to the canvas center
-        const playerXPosRelativeToCenter = this.player.x - CANVAS_WIDTH/2;
-        // Check if the player has moved past the center of the canvas
-        if (playerXPosRelativeToCenter > 0) {
-            // Move the platforms and background layers to simulate scrolling
-            const scrollDistance = playerXPosRelativeToCenter;
-            for (const platform of this.curLevel.platforms) {
-                platform.x -= scrollDistance;
-            }
-            for (const layer of this.layers) {
-                layer.update(this.input);
-            }
-            // Check if the current level has been completely scrolled off the screen
-            if (this.curLevel.platforms[0].x + this.curLevel.platforms[0].width < 0) {
-                // If so, change to the next level and reset its position
-                this.changeCurLevel();
-            }
+        const playerPos = [this.player.x, this.player.y];
+        console.log(playerPos);
+        if (distance(playerPos, this.curLevel.endPoint) <= 0) {
+            this.changeCurLevel();
         }
         this.ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
         for (const layer of this.layers) {
@@ -107,7 +86,6 @@ export default class Game {
         this.curLevel.drawNext(this.ctx, this.nextLevel.background)
         this.player.draw(this.ctx);
         this.player.update(input, deltaTime, spriteSheet);
-        this.curLevel.update(input);
         requestAnimationFrame(this.animate.bind(this));
     }
 }

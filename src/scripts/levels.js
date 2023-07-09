@@ -15,6 +15,8 @@ export default class Level {
         this.height = canvas.height;
         this.x2 = this.width;
         this.speed = 5;
+        this.startPoint = [40, 48];
+        this.endPoint = [680, 556];
     };
 
     draw(ctx){
@@ -27,32 +29,5 @@ export default class Level {
 
     drawNext(ctx, image){
         ctx.drawImage(image, this.x2, this.y, this.width, this.height)
-    };
-
-    update(input){
-        this.x -= this.speed;
-        this.x2 -= this.speed;
-
-        if (this.x > 0){
-            this.x2 = this.x - this.width;
-        }
-        if (this.x2 > 0){
-            this.x = this.x2 - this.width;
-        }
-
-        if (input.keys.includes('d')){
-            this.speed = 5;
-        } else if (input.keys.includes('a')){
-            this.speed = -5;
-        } else {
-            this.speed = 0;
-        }
-        
-        //horizontal movement
-        if (this.x < -(this.width)){
-            this.x = this.width;
-        } else if (this.x > (this.width)){
-            this.x = -(this.width);
-        }
     };
 }

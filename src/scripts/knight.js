@@ -1,10 +1,6 @@
     const canvas = document.getElementById('canvas1');
-    const ctx = canvas.getContext('2d');
     canvas.width = 800;
     canvas.height = 700;
-
-    import InputHandler from "/src/scripts/input.js";
-    import { distance, flipHorizontally } from "/src/scripts/util.js";
 
     const idleImage = new Image();
     idleImage.src = './Assets/Colour1/Outline/120x80_PNGSheets/_Idle.png';
@@ -18,8 +14,6 @@
     jumpImage.src = './Assets/Knight/Colour1/Outline/120x80_PNGSheets/_Jump.png';
     // const turnAroundImage = new Image();
     // turnAroundImage = 'Assets/Knight/Colour1/Outline/120x80_PNGSheets/_TurnAround.png';
-
-    const spriteSheet = [idleImage, runImage, jumpImage];
    
     export default class Player {
         constructor(gameWidth, gameHeight, sprites){
@@ -108,14 +102,4 @@
         onGround(){
             return (this.y >= this.gameHeight - this.height - 64);
         };
-    }
-
-    const input = new InputHandler();
-    const testPlayer = new Player(canvas.width, canvas.height);
-
-    function animate(){
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
-        testPlayer.draw(ctx);
-        testPlayer.update(input);
-        requestAnimationFrame(animate);
     }
