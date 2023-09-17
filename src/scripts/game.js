@@ -71,6 +71,18 @@ export default class Game {
         return this.curLevel;
     };
 
+    hasCollided(obj1, obj2){
+        if(obj1.x + obj1.width >= obj2.x && obj1.x <= obj2.x + obj2.width){
+            this.player.collideRight = true;
+        } else if (obj1.y + obj1.height >= obj2.y && obj1.y <= obj2.y + obj2.height) {
+            this.player.collideUp = true;
+        } else {
+            this.player.collideRight = false;
+            this.player.collideLeft = false;
+            this.player.collideUp = false;
+        }
+    }
+
     animate(timeStamp) {
         const deltaTime = timeStamp - this.lastTime;
         const playerPos = [this.player.x, this.player.y];
