@@ -74,7 +74,7 @@
             } else if (input.keys.includes('a') && !this.collideLeft){
                 this.speed = -5;
                 this.image = sprites[1];
-            } else if (input.keys.includes('w') && this.onGround()){
+            } else if (input.keys.includes('w') && this.canJump()){
                 // console.log("jumping")
                 this.vel -= 15;
                 this.image = sprites[2];

@@ -55,12 +55,12 @@ export default class Game {
         this.ctx = ctx;
         this.layers = layers;
         this.lastTime = 0;
-        this.randomLevels = levels.slice(1);
+        this.remainingLevels = levels.slice(1);
     };
 
     setNextLevel(){
         let levelSelector = this.levels.indexOf(this.curLevel);
-        return this.randomLevels[levelSelector + 1];
+        return this.remainingLevels[levelSelector + 1];
     };
 
     changeCurLevel(){
@@ -93,6 +93,9 @@ export default class Game {
         this.ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
         for (const layer of this.layers) {
           layer.draw(this.ctx);
+        }
+        for(let i = 0; i < this.curLevel.platforms.length; i++){
+            this.hasCollided(this.player, this.curLevel.platforms[i])
         }
         this.curLevel.draw(this.ctx);
         this.curLevel.drawNext(this.ctx, this.nextLevel.background)
