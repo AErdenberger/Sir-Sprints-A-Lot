@@ -59,8 +59,8 @@ export default class Game {
     };
 
     setNextLevel(){
-        let levelSelector = Math.floor(Math.random() * 8);
-        return this.randomLevels[levelSelector];
+        let levelSelector = this.levels.indexOf(this.curLevel);
+        return this.randomLevels[levelSelector + 1];
     };
 
     changeCurLevel(){

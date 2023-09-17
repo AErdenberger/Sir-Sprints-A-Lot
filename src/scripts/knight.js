@@ -34,6 +34,10 @@
             this.speed = 0;
             this.vel = 0;
             this.grav = 1;
+            this.canJump = true;
+            this.collideUp = false;
+            this.collideRight = false;
+            this.collideLeft = false;
         }
         
         draw(context){
@@ -64,10 +68,10 @@
             }
 
             //controls
-            if (input.keys.includes('d')){
+            if (input.keys.includes('d') && !this.collideRight){
                 this.speed = 5;
                 this.image = sprites[1];
-            } else if (input.keys.includes('a')){
+            } else if (input.keys.includes('a') && !this.collideLeft){
                 this.speed = -5;
                 this.image = sprites[1];
             } else if (input.keys.includes('w') && this.onGround()){
