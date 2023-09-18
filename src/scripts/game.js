@@ -60,7 +60,12 @@ export default class Game {
 
     setNextLevel(){
         let levelSelector = this.levels.indexOf(this.curLevel);
-        return this.remainingLevels[levelSelector + 1];
+        if(levelSelector+1 > this.levels.length){
+            return this.nextLevel = false;
+        } else {
+            return this.remainingLevels[levelSelector + 1];
+        }
+        
     };
 
     changeCurLevel(){
@@ -102,5 +107,11 @@ export default class Game {
         this.player.draw(this.ctx);
         this.player.update(input, deltaTime, spriteSheet);
         requestAnimationFrame(this.animate.bind(this));
+    }
+
+    gameEnd(){
+        if(!this.nextLevel){
+            //end the game
+        }
     }
 }
