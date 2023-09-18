@@ -86,6 +86,8 @@ export default class Game {
             this.player.collideLeft = false;
             this.player.collideUp = false;
         }
+
+        //check the left side and the under side to see if the player can run left or jump.
     }
 
     animate(timeStamp) {
