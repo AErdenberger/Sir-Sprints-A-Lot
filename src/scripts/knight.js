@@ -22,7 +22,9 @@
             this.width = 120;
             this.height = 80;
             this.x = 32;
+            this.x2 = this.width;
             this.y = this.gameHeight - this.height - 64;
+            this.y2 = this.gameHeight;
             this.image = idleImage;
             this.maxFrame = 10;
             this.frameX = 0;
