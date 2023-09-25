@@ -4,6 +4,8 @@ export default class Platform {
         this.y = y;
         this.height = height * (2.1875);
         this.width = width * (1.667);
+        this.x2 = this.width;
+        this.y2 = this.height;
     };
 
     draw(ctx) {
