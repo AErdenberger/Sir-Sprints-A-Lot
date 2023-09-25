@@ -89,9 +89,11 @@ export default class Game {
 
         //check the left side and the under side to see if the player can run left or jump.
         //this.player.x2 + this.player.height ? This the right side?
-        
+
     }
 
+
+    //where to put the actual collision logic in the game loop?
     animate(timeStamp) {
         const deltaTime = timeStamp - this.lastTime;
         const playerPos = [this.player.x, this.player.y];
